@@ -36,7 +36,7 @@ public class FrontController {
 
 	@PostMapping(path="/login")
     public String submitLogin(@ModelAttribute @Valid User user, BindingResult bindings, 
-    Model m){
+    Model m) throws Exception{
 
         if(bindings.hasErrors()){
             return "view0";
@@ -49,12 +49,9 @@ public class FrontController {
 		System.out.printf(">>> USERNAME: %s\n", username);
 		System.out.printf(">>> PASSWORD: %s\n", password);
 
-		try {
-			authSvc.authenticate(username, password);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		authSvc.authenticate(username, password);
+
 
         return "test";
 

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import ibf2022.batch2.ssf.frontcontroller.models.User;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
@@ -46,8 +47,18 @@ public class AuthenticationService {
 		}
 
 		String payload = resp.getBody();
-		JsonReader reader = Json.createReader(new StringReader(payload));
-		JsonObject json = reader.readObject();
+		User authUser = User.createUserObject(payload);
+		if (authUser.getMessage() != null){
+			System.out.println("User authenticated");
+			System.out.println(authUser.getMessage());
+		}
+		else{
+			System.out.println("Authentication failed");
+		}
+
+
+		// JsonReader reader = Json.createReader(new StringReader(payload));
+		// JsonObject json = reader.readObject();
 
 		
 
