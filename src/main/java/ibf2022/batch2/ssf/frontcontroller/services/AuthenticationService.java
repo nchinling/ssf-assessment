@@ -5,6 +5,7 @@ import java.io.StringReader;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,11 @@ public class AuthenticationService {
 	@Autowired
     private AuthenticationRepository authrepo;
 
-	public static final String AUTHSITE = "https://auth.chuklee.com/api/authenticate";
+	@Value("${AUTHENTICATE}")
+    private String MrLeeAuthenticate;
+
+	// public static final String AUTHSITE = "https://auth.chuklee.com/api/authenticate";
+	public final String AUTHSITE = MrLeeAuthenticate;
 	
 	
 	// TODO: Task 2
