@@ -6,17 +6,16 @@
 		<title>Top Secret</title>
 	</head>
 	<body>
-
+	
 		<h2>Top Secret</h2>
 
 		<div style="margin-bottom: 10px;">
 			<img src="/polar_bear.png" height="300">
 		</div>
 
-		<div>
-			<button>Logout</button>
-		</div>
-
+		<form method="GET" data-th-action="@{/}">
+			<button type="submit">Logout</button>
+		</form>
 
 		
 	</body>

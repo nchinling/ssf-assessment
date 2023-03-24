@@ -74,7 +74,17 @@ public class AuthenticationService {
 	// TODO: Task 3
 	// DO NOT CHANGE THE METHOD'S SIGNATURE
 	// Write an implementation to disable a user account for 30 mins
-	public void disableUser(String username) {
+	public void disableUser(String username) throws IOException {
+		
+		// save user to redis to indicate it has been blocked. 
+			authrepo.saveUsername(username);
+
+		//search for user. if user is found in redis list, prevent login.
+		//redirect to view 2.  
+			if (authrepo.getUser(username) != null){
+				System.out.printf(">>> Your login %s has been deactivated for 30 minutes\n", username);
+			}
+
 	}
 
 	// TODO: Task 5

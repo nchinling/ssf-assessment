@@ -63,6 +63,10 @@ public class FrontController {
 		}
 
 		Captcha captcha = getCaptcha(session);
+		if (captcha.getCounter() > 3){
+			authSvc.disableUser(user.getUsername());
+			return "view2";
+		}
 
 		System.out.printf(">>> GETCOUNT: %s\n", captcha.getCounter());
 
@@ -86,11 +90,12 @@ public class FrontController {
 		  }
 
 		  if(authenticated == true){
-			return "test";
+			return "view1";
 		  }
 
 		//to track number of login attempt. 
 		captcha.increment();
+		
         return "view0";
 
     }

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View 2</title>
+</head>
+<body>
+    <form method="GET" data-th-action="@{/}" data-th-object="${user}">
+    <h2 data-th-text="'Your login *{username} + ' has been deactivated for 30 mins'"></h2>
+    <tr>
+        <td></td>
+        <td>
+            <button type="submit">Back</button>
+        </td>
+    </tr>
+    </form>
+</body>
+</html>

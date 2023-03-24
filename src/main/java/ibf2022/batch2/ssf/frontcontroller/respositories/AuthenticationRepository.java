@@ -30,6 +30,14 @@ public class AuthenticationRepository {
     	Duration duration = Duration.ofMinutes(timeout);
 		this.template.opsForValue().set(user.getUsername(), user.toJSON().toString(), duration);
 	 }
+
+	 public void saveUsername(String username){
+		
+		//implement timeout of 30 mins
+		int timeout = 30;
+    	Duration duration = Duration.ofMinutes(timeout);
+		this.template.opsForValue().set(username, username, duration);
+	 }
  
 	
 	 //get json string from redis
