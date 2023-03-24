@@ -2,10 +2,18 @@ package ibf2022.batch2.ssf.frontcontroller.services;
 
 public class AuthenticationService {
 
+	
 	// TODO: Task 2
 	// DO NOT CHANGE THE METHOD'S SIGNATURE
 	// Write the authentication method in here
 	public void authenticate(String username, String password) throws Exception {
+		
+
+
+
+
+
+
 	}
 
 	// TODO: Task 3

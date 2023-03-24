@@ -1,0 +1,35 @@
+.pizza {
+	width: 12vw;
+}
+.thumbnail {
+	width: 20vw;
+}
+.title {
+	display: flex;
+	align-items: center;
+}
+.title>h2 {
+	font-size: 2em;
+}
+
+
+.error{
+	font-family: monospace;
+	color:red;
+	font-weight: bold;
+}
+
+table, th, td {
+    border: 2px solid;
+  }
+
+
+
+  body {
+    /* background-image: url('/images/weatherbackground.jpg'); */
+    background-color:burlywood;
+  }
+
+  .bold {
+    font-weight: bold;
+  }
