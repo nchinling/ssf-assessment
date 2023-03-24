@@ -72,6 +72,16 @@ public class User {
         return u;
     }
 
+    public JsonObject toJSON(){
+        return Json.createObjectBuilder()
+                .add("username", this.getUsername())
+                .add("password", this.getPassword())
+                .add("message", this.getMessage())
+                .build();
+    }
+
+
+
 }
 
 

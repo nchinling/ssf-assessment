@@ -2,7 +2,9 @@ package ibf2022.batch2.ssf.frontcontroller.services;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -10,12 +12,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import ibf2022.batch2.ssf.frontcontroller.models.User;
+import ibf2022.batch2.ssf.frontcontroller.respositories.AuthenticationRepository;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
 
 @Service
 public class AuthenticationService {
+
+	@Autowired
+    private AuthenticationRepository authrepo;
 
 	public static final String AUTHSITE = "https://auth.chuklee.com/api/authenticate";
 	
@@ -83,4 +89,12 @@ public class AuthenticationService {
 		JsonReader r = Json.createReader(new StringReader(json));
 		return r.readObject();
 	}
+
+	public void save(final User user){
+        authrepo.save(user);
+    }
+
+	public Optional<User> checkUser(final String username) throws IOException{
+        return authrepo.getUser(username);
+    }  
 }

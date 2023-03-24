@@ -49,19 +49,44 @@
 					<button type="submit">Login</button>
 				</td>
 			</tr>
-			<!-- <tr>
-				<td>Number of attempts:</td>
-				<td>
-					<span data-th-text="*{captcha.counter}"></span>
-				</td>
-			</tr> -->
 		</table>
 	</form>
 
-	<!-- <div data-th-unless="${null == error}">
-		<div>Error</div>
-		<code data-th-text="${error}"></code>
-	</div> -->
+	<!-- To display number of error counts -->
+	<div>
+		<tr>
+			<td>Number of attempts:</td>
+			<!-- Code commented as it causes error  -->
+			<!-- <td>
+				<span data-th-text="*{captcha.counter}"></span>
+			</td>  -->
+		</tr>
+	</div>
+
+	<div>
+
+
+		<!-- //Use thymeleaf to display captcha if (counter > 0 and counter < 4) 
 		
+		<table border="1" style="margin-top: 2vh; margin-bottom: 2vh;"> 
+						 data-th-if="${#captcha.counter > 0 and captcha.counter < 4}" 
+				<thead>
+					<tr> 
+						 <h2 data-th-text="*{captcha.stringEqn}"></h2> 
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Answer: </td>
+						<td> <input type="text" name="result" id="result" size="30" 
+							placeholder="Answer" data-th-field="*{captcha.result}"> </td>
+					</tr>
+				</tbody>
+		</table>
+		-->
+		
+
+	</div>
+
 	</body>
 </html>

@@ -36,9 +36,16 @@ public class FrontController {
 		User user = getUser(session);
 
 		// System.out.printf(">>> Number of Attempts: %s\n", captcha.getCounter());
-		// if (captcha.getCounter() > 3 ){
-		// 	return "lock"; 
-		// }
+		if (captcha.getCounter() > 3 ){
+			return "lock"; 
+		}
+
+		if (captcha.getCounter() > 0 && captcha.getCounter() < 4 ){
+			captcha.generateEqn();
+			// captcha.setStringEqn(--generateEqnConvertedtoString);
+		}
+
+		
 
 		// model.addAttribute(ATTR_USER, new User());
 		model.addAttribute(ATTR_CAPTCHA, captcha);
@@ -56,13 +63,17 @@ public class FrontController {
 		}
 
 		Captcha captcha = getCaptcha(session);
-        
+
+		System.out.printf(">>> GETCOUNT: %s\n", captcha.getCounter());
+
 		String username = user.getUsername();
 		String password = user.getPassword();
 
 		System.out.printf(">>> USERNAME: %s\n", username);
 		System.out.printf(">>> PASSWORD: %s\n", password);
 
+		//write code to perform authentication on getCaptcha answer. If answer is correct
+		// i.e. flag is true, perform authentication
 		try {
 			authSvc.authenticate(username, password);
 			authenticated = true;
@@ -78,7 +89,8 @@ public class FrontController {
 			return "test";
 		  }
 
-		// captcha.increment();
+		//to track number of login attempt. 
+		captcha.increment();
         return "view0";
 
     }
@@ -92,7 +104,6 @@ public class FrontController {
 		return user;
 	}
 
-	
 	private Captcha getCaptcha(HttpSession sess) {
 		Captcha captcha = (Captcha)sess.getAttribute(ATTR_CAPTCHA);
 		if (null == captcha) {
