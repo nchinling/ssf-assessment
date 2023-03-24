@@ -92,11 +92,10 @@ public class FrontController {
 		  if(authenticated == true){
 			return "view1";
 		  }
-
-		//to track number of login attempt. 
-		captcha.increment();
-		
-        return "view0";
+		  else{		
+			//to track number of login attempt. 
+			captcha.increment();
+			return "view0";}
 
     }
 
