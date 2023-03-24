@@ -49,8 +49,19 @@
 					<button type="submit">Login</button>
 				</td>
 			</tr>
+			<!-- <tr>
+				<td>Number of attempts:</td>
+				<td>
+					<span data-th-text="*{captcha.counter}"></span>
+				</td>
+			</tr> -->
 		</table>
 	</form>
+
+	<!-- <div data-th-unless="${null == error}">
+		<div>Error</div>
+		<code data-th-text="${error}"></code>
+	</div> -->
 		
 	</body>
 </html>

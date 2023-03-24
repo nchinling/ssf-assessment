@@ -22,6 +22,8 @@ public class User {
     //to receive message from endpoint. 
     private String message;
 
+    // private int counter;
+
     public User() {}
 
     public User(String username, String password) {
@@ -33,13 +35,16 @@ public class User {
         this.message = message;
     }
 
+    // public User(int counter) {
+    //     this.counter = counter;
+    // }
+
     public User(String username,
         String password, String message) {
         this.username = username;
         this.password = password;
         this.message = message;
     }
-
     
     public String getUsername() {return username;}
     public void setUsername(String username) {this.username = username;}
@@ -49,6 +54,12 @@ public class User {
 
     public String getMessage() {return message;}
     public void setMessage(String message) {this.message = message;}
+
+    // public int getCounter() {return counter;}
+    // public void setCounter(int counter) {this.counter = counter;}
+    
+    //to keep track of login attempts
+    // public void increment(){this.counter++;}
 
 
     public static User createUserObject(String json) throws IOException {
@@ -60,6 +71,7 @@ public class User {
         }
         return u;
     }
+
 }
 
 

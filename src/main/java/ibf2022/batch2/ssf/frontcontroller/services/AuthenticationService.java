@@ -1,5 +1,6 @@
 package ibf2022.batch2.ssf.frontcontroller.services;
 
+import java.io.IOException;
 import java.io.StringReader;
 
 import org.springframework.http.MediaType;
@@ -40,31 +41,28 @@ public class AuthenticationService {
 		
 		ResponseEntity<String> resp;
 		RestTemplate template = new RestTemplate();
-		try {
+		// try {
 			resp = template.exchange(req, String.class);
-		} catch (Exception ex) {
-			throw ex;
-		}
+		// } catch (Exception ex) {
+		// 	throw ex;
+		// }
 
 		String payload = resp.getBody();
 		User authUser = User.createUserObject(payload);
-		if (authUser.getMessage() != null){
-			System.out.println("User authenticated");
+		// if (authUser.getMessage() != null){
 			System.out.println(authUser.getMessage());
-		}
-		else{
-			System.out.println("Authentication failed");
-		}
+			System.out.println("User authenticated");
+		// }
+		// else{
+		// 	System.out.println(authUser.getMessage());
+		// 	System.out.println("Authentication failed");
+		// }
 
 
 		// JsonReader reader = Json.createReader(new StringReader(payload));
 		// JsonObject json = reader.readObject();
 
-		
-
-
-
-
+	
 	}
 
 	// TODO: Task 3
