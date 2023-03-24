@@ -40,7 +40,21 @@ public class FrontController {
 
         if(bindings.hasErrors()){
             return "view0";
-        }
+		}
+        
+
+		String username = user.getUsername();
+		String password = user.getPassword();
+
+		System.out.printf(">>> USERNAME: %s\n", username);
+		System.out.printf(">>> PASSWORD: %s\n", password);
+
+		try {
+			authSvc.authenticate(username, password);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
         return "test";
 
