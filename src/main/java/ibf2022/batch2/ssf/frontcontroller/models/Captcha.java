@@ -3,13 +3,13 @@ import java.util.Random;
 
 public class Captcha {
     private String question = "";
-    private int answer = 0;
+    private float answer = 0f;
     private int counter = 0;
 
     public Captcha() {
         Random rand = new Random();
-        int num1 = rand.nextInt(50) + 1; // Random number between 1 and 50
-        int num2 = rand.nextInt(50) + 1; // Random number between 1 and 50
+        float num1 = rand.nextInt(50) + 1; // Random number between 1 and 50
+        float num2 = rand.nextInt(50) + 1; // Random number between 1 and 50
         int operatorIndex = rand.nextInt(4); // Random index between 0 and 3
         char operator = ' ';
         switch (operatorIndex) {
@@ -39,20 +39,19 @@ public class Captcha {
         return question;
     }
 
-    public boolean checkAnswer(int userAnswer) {
+    public boolean checkAnswer(float userAnswer) {
         counter++;
         return userAnswer == answer;
     }
 
-    public int getCounter() {
-        return counter;
-    }
+    public int getCounter() {return counter;}
+    public void setCounter(int counter) {this.counter = counter;}
 
-    public void setCounter(int counter) {
-        this.counter = counter;
-    }
+    public float getAnswer() {return answer;}
+    public void setAnswer(float answer) {this.answer = answer;}
 
     public void increment() {
         counter++;
     }
+
 }

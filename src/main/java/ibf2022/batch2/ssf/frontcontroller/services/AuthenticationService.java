@@ -60,15 +60,6 @@ public class AuthenticationService {
 		// if (authUser.getMessage() != null){
 			System.out.println(authUser.getMessage());
 			System.out.println("User authenticated");
-		// }
-		// else{
-		// 	System.out.println(authUser.getMessage());
-		// 	System.out.println("Authentication failed");
-		// }
-
-
-		// JsonReader reader = Json.createReader(new StringReader(payload));
-		// JsonObject json = reader.readObject();
 
 	
 	}
@@ -78,14 +69,8 @@ public class AuthenticationService {
 	// Write an implementation to disable a user account for 30 mins
 	public void disableUser(String username) throws IOException {
 		
-		// save user to redis to indicate it has been blocked. 
+	 
 			authrepo.saveUsername(username);
-
-		//search for user. if user is found in redis list, prevent login.
-		//redirect to view 2.  
-			// if (authrepo.getUser(username) != null){
-			// 	System.out.printf(">>> Your login %s has been deactivated for 30 minutes\n", username);
-			// }
 
 	}
 

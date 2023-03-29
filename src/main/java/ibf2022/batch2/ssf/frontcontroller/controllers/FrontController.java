@@ -37,8 +37,6 @@ public class FrontController {
 		Captcha captcha = getCaptcha(session);
 		User user = getUser(session);
 
-		// model.addAttribute(ATTR_CAPTCHA, captcha);
-		// model.addAttribute(ATTR_USER, user);
 		System.out.printf("Initial Counter value: %d\n", captcha.getCounter());
 		if(captcha.getCounter() > 3){
 			captcha.setCounter(0);
@@ -57,10 +55,11 @@ public class FrontController {
     public String submitLogin(@ModelAttribute @Valid User user, BindingResult bindings, 
     Model m, HttpSession session) throws Exception{
 
-		// user = getUser(session);
+		
 		Captcha captcha = getCaptcha(session);
         if(bindings.hasErrors()){
-            return "view0";
+            m.addAttribute(ATTR_CAPTCHA, captcha);
+			return "view0";
 		}
 		
 
@@ -72,14 +71,12 @@ public class FrontController {
 		System.out.printf(">>> USERNAME: %s\n", username);
 		System.out.printf(">>> PASSWORD: %s\n", password);
 
-		//write code to perform authentication on getCaptcha answer. If answer is correct
-		// i.e. flag is true, perform authentication
 		try {
 			authSvc.authenticate(username, password);
 			authenticated = true;
 			System.out.printf(">>> AUTH_STATUS: %s\n", authenticated);
-		  }
-		  catch(Exception e) {
+		    }
+		catch(Exception e) {
 			authenticated = false;
 			System.out.printf(">>> AUTH_STATUS: %s\n", authenticated);
 			
@@ -89,7 +86,6 @@ public class FrontController {
 			return "view1";
 		  }
 		  else{		
-			//to track number of login attempt. 
 			user = getUser(session);
 			user.setUsername(username);
 			captcha.increment();

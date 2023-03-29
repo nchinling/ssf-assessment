@@ -50,53 +50,19 @@
 		</div>
 
 		<div th:if="${captcha.counter > 0}">
-			<label for="myField">Answer:</label>
+			<label>Answer:</label>
+			<!-- <input type="text" id="answer" name="answer" data-th-field="*{captcha.answer}"> -->
 			<input type="text" id="answer" name="answer">
 		</div>
+		<br/>
 		<tr>
-			<td></td>
+			
 			<td>
 				<button type="submit">Login</button>
 			</td>
 		</tr>
 
 	</form>
-
-	<!--<form method="POST" data-th-action="@{/login}" data-th-object="${captcha}">
-	<div th:with="shouldDisplay=${captcha.counter > 0}">
-		<p th:if="${shouldDisplay}" th:text="${captcha.question}"></p>
-	</div>
-		<div th:if="${captcha.counter > 0}">
-			<label for="myField">Answer:</label>
-			<input type="text" id="answer" name="answer">
-	</div> 
-	</form> -->
-
-	<!-- To display number of error counts -->
-	<!--<div>
-		<tr>
-			<td>Number of attempts:</td>
-			
-			<td>
-				<span data-th-text="*{captcha.counter}"></span>
-			</td>    
-		</tr>
-	</div> -->
-
-
-
-
-		<!-- //Use thymeleaf to display captcha if (counter > 3) -->
-	
-		<!-- <div th:with="shouldDisplay=${captcha.counter > 0}">
-			<p th:if="${shouldDisplay}" th:text="${captcha.question}"></p>
-		</div>
-
-		<div th:if="${captcha.counter > 0}">
-			<label for="myField">Answer:</label>
-			<input type="text" id="answer" name="myField">
-		  </div> -->
-
 
 	</body>
 </html>
