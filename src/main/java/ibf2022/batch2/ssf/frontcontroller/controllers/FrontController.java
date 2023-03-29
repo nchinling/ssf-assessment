@@ -1,5 +1,7 @@
 package ibf2022.batch2.ssf.frontcontroller.controllers;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,24 +32,21 @@ public class FrontController {
 	// TODO: Task 2, Task 3, Task 4, Task 6
 
 	@GetMapping(path={"/", "/index.html"})
-	public String getIndex(Model model, HttpSession session) {
+	public String getIndex(Model model, HttpSession session) throws IOException {
 
 		Captcha captcha = getCaptcha(session);
 		User user = getUser(session);
 
-		// System.out.printf(">>> Number of Attempts: %s\n", captcha.getCounter());
-		if (captcha.getCounter() > 3 ){
-			return "lock"; 
+		// model.addAttribute(ATTR_CAPTCHA, captcha);
+		// model.addAttribute(ATTR_USER, user);
+		System.out.printf("Initial Counter value: %d\n", captcha.getCounter());
+		if(captcha.getCounter() > 3){
+			captcha.setCounter(0);
+			model.addAttribute(ATTR_USER, user);
+			authSvc.disableUser(user.getUsername());
+			return "view2";
 		}
 
-		if (captcha.getCounter() > 0 && captcha.getCounter() < 4 ){
-			captcha.generateEqn();
-			// captcha.setStringEqn(--generateEqnConvertedtoString);
-		}
-
-		
-
-		// model.addAttribute(ATTR_USER, new User());
 		model.addAttribute(ATTR_CAPTCHA, captcha);
 		model.addAttribute(ATTR_USER, user);
 		
@@ -58,17 +57,14 @@ public class FrontController {
     public String submitLogin(@ModelAttribute @Valid User user, BindingResult bindings, 
     Model m, HttpSession session) throws Exception{
 
+		// user = getUser(session);
+		Captcha captcha = getCaptcha(session);
         if(bindings.hasErrors()){
             return "view0";
 		}
+		
 
-		Captcha captcha = getCaptcha(session);
-		if (captcha.getCounter() > 3){
-			authSvc.disableUser(user.getUsername());
-			return "view2";
-		}
-
-		System.out.printf(">>> GETCOUNT: %s\n", captcha.getCounter());
+		System.out.printf(">>> GETCOUNT(after submit): %d\n", captcha.getCounter());
 
 		String username = user.getUsername();
 		String password = user.getPassword();
@@ -94,8 +90,11 @@ public class FrontController {
 		  }
 		  else{		
 			//to track number of login attempt. 
+			user = getUser(session);
+			user.setUsername(username);
 			captcha.increment();
-			return "view0";}
+			
+			return "redirect:/";}
 
     }
 

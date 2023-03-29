@@ -43,50 +43,60 @@
 					</div>
 				</td>
 			</tr>
-			<tr>
-				<td></td>
-				<td>
-					<button type="submit">Login</button>
-				</td>
-			</tr>
 		</table>
+
+		<div th:with="shouldDisplay=${captcha.counter > 0}">
+			<p th:if="${shouldDisplay}" th:text="${captcha.question}"></p>
+		</div>
+
+		<div th:if="${captcha.counter > 0}">
+			<label for="myField">Answer:</label>
+			<input type="text" id="answer" name="answer">
+		</div>
+		<tr>
+			<td></td>
+			<td>
+				<button type="submit">Login</button>
+			</td>
+		</tr>
+
 	</form>
 
+	<!--<form method="POST" data-th-action="@{/login}" data-th-object="${captcha}">
+	<div th:with="shouldDisplay=${captcha.counter > 0}">
+		<p th:if="${shouldDisplay}" th:text="${captcha.question}"></p>
+	</div>
+		<div th:if="${captcha.counter > 0}">
+			<label for="myField">Answer:</label>
+			<input type="text" id="answer" name="answer">
+	</div> 
+	</form> -->
+
 	<!-- To display number of error counts -->
-	<div>
+	<!--<div>
 		<tr>
 			<td>Number of attempts:</td>
-			<!-- Code commented as it causes error  -->
-			<!-- <td>
+			
+			<td>
 				<span data-th-text="*{captcha.counter}"></span>
-			</td>  -->
+			</td>    
 		</tr>
-	</div>
-
-	<div>
+	</div> -->
 
 
-		<!-- //Use thymeleaf to display captcha if (counter > 0 and counter < 4) 
-		
-		<table border="1" style="margin-top: 2vh; margin-bottom: 2vh;"> 
-						 data-th-if="${#captcha.counter > 0 and captcha.counter < 4}" 
-				<thead>
-					<tr> 
-						 <h2 data-th-text="*{captcha.stringEqn}"></h2> 
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Answer: </td>
-						<td> <input type="text" name="result" id="result" size="30" 
-							placeholder="Answer" data-th-field="*{captcha.result}"> </td>
-					</tr>
-				</tbody>
-		</table>
-		-->
-		
 
-	</div>
+
+		<!-- //Use thymeleaf to display captcha if (counter > 3) -->
+	
+		<!-- <div th:with="shouldDisplay=${captcha.counter > 0}">
+			<p th:if="${shouldDisplay}" th:text="${captcha.question}"></p>
+		</div>
+
+		<div th:if="${captcha.counter > 0}">
+			<label for="myField">Answer:</label>
+			<input type="text" id="answer" name="myField">
+		  </div> -->
+
 
 	</body>
 </html>

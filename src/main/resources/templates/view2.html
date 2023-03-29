@@ -8,13 +8,25 @@
 </head>
 <body>
     <form method="GET" data-th-action="@{/}" data-th-object="${user}">
-    <h2 data-th-text="'Your login *{username} + ' has been deactivated for 30 mins'"></h2>
+    <!-- <h2 data-th-text="'Your login *{username} + ' has been deactivated for 30 mins'"></h2>  -->
+    <h2> Your login <span data-th-text="*{username}"></span> has been deactivated for 30 mins. </h2> 
+    <!-- <h2 data-th-text="*{username}"></h2> -->
+    <!-- <h2>You have been logged out for 30 minutes</h2> -->
     <tr>
-        <td></td>
         <td>
             <button type="submit">Back</button>
         </td>
     </tr>
     </form>
+
+    <!-- <form method="GET" data-th-action="@{/}" data-th-object="${user}">
+        <h2 th:text="'Your login ' + ${user.username} + ' has been deactivated for 30 mins'"></h2> 
+        <tr>
+            <td></td>
+            <td>
+                <button type="submit">Back</button>
+            </td>
+        </tr>
+    </form> -->
 </body>
 </html>

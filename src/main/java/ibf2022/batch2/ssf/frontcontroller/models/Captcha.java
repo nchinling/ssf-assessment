@@ -1,101 +1,58 @@
 package ibf2022.batch2.ssf.frontcontroller.models;
-
 import java.util.Random;
 
 public class Captcha {
-    private int num1;
-    private int num2;
-    private String stringEqn;
-    private float result;
+    private String question = "";
+    private int answer = 0;
     private int counter = 0;
-    private boolean flag = false;
 
-    
-    public Captcha() {}
-    
-    public Captcha(int num1, int num2) {
-        this.num1 = num1;
-        this.num2 = num2;
-    }
-
-    public Captcha(int counter) {this.counter = counter;}
-
- 
-    public int getNum1() {return num1;}
-    public void setNum1(int num1) {this.num1 = num1;}
-    
-    public int getNum2() {return num2;}
-    public void setNum2(int num2) {this.num2 = num2;}
-
-    
-
-    public String getStringEqn() {return stringEqn;}
-    public void setStringEqn(String stringEqn) {this.stringEqn = stringEqn;}
-
-    public boolean isFlag() {
-        return flag;
-    }
-
-    public void setFlag(boolean flag) {
-        this.flag = flag;
-    }
-
-    public int getCounter() {return counter;}
-    public void setCounter(int counter) {this.counter = counter;}
-
-    public float getResult() {
-        return result;
-    }
-
-    public void setResult(float result) {
-        this.result = result;
-    }
-
-
-
-    //to keep track of login attempts
-    public void increment(){this.counter++;}
-
-    //implement random numbers generator
-    public void generateEqn(){
-
-        Random random = new Random();
-        Random operatorChoice = new Random();
-        String operatorSwitch;
-        float correctAnswer = 0;
-
-        int operator = operatorChoice.nextInt(4);
-        this.num1 = random.nextInt(51);
-        this.num2 = random.nextInt(51);
-
-        switch (operator){
-
-            case 0: operatorSwitch= "+";
-                correctAnswer = this.num1+this.num2;
+    public Captcha() {
+        Random rand = new Random();
+        int num1 = rand.nextInt(50) + 1; // Random number between 1 and 50
+        int num2 = rand.nextInt(50) + 1; // Random number between 1 and 50
+        int operatorIndex = rand.nextInt(4); // Random index between 0 and 3
+        char operator = ' ';
+        switch (operatorIndex) {
+            case 0:
+                operator = '+';
+                this.answer = num1 + num2;
                 break;
-            case 1: operatorSwitch= "-";
-                correctAnswer = this.num1-this.num2;
+            case 1:
+                operator = '-';
+                this.answer = num1 - num2;
                 break;
-            case 2: operatorSwitch= "*";
-                correctAnswer = this.num1*this.num2;
+            case 2:
+                operator = '*';
+                this.answer = num1 * num2;
                 break;
-            case 3: operatorSwitch= "/";
-                correctAnswer = this.num1/this.num2;
+            case 3:
+                operator = '/';
+                this.answer = num1 / num2;
+                num1 = this.answer * num2; // Ensure that the question uses a whole number as the dividend
                 break;
-            default: operatorSwitch= "";
         }
-
-        System.out.println("What is: "+this.num1+operatorSwitch+this.num2+"?");
-
-        if(this.result != correctAnswer){
-            System.out.println("Wrong answer! Right answer is: "+ correctAnswer);
-        }
-        else{
-            System.out.println("Your answer is correct");
-            this.flag = true; 
-        }
+        this.question = num1 + " " + operator + " " + num2 + " = ?";
+        this.counter = 0;
     }
- 
 
+    public String getQuestion() {
+        return question;
+    }
+
+    public boolean checkAnswer(int userAnswer) {
+        counter++;
+        return userAnswer == answer;
+    }
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
+    }
+
+    public void increment() {
+        counter++;
+    }
 }
-

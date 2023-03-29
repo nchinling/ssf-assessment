@@ -24,12 +24,9 @@ public class AuthenticationService {
 	@Autowired
     private AuthenticationRepository authrepo;
 
-	@Value("${AUTHENTICATE}")
-    private String MrLeeAuthenticate;
 
-	// public static final String AUTHSITE = "https://auth.chuklee.com/api/authenticate";
-	public final String AUTHSITE = MrLeeAuthenticate;
-	
+	public static final String AUTHSITE = "https://auth.chuklee.com/api/authenticate";
+
 	
 	// TODO: Task 2
 	// DO NOT CHANGE THE METHOD'S SIGNATURE
@@ -86,9 +83,9 @@ public class AuthenticationService {
 
 		//search for user. if user is found in redis list, prevent login.
 		//redirect to view 2.  
-			if (authrepo.getUser(username) != null){
-				System.out.printf(">>> Your login %s has been deactivated for 30 minutes\n", username);
-			}
+			// if (authrepo.getUser(username) != null){
+			// 	System.out.printf(">>> Your login %s has been deactivated for 30 minutes\n", username);
+			// }
 
 	}
 

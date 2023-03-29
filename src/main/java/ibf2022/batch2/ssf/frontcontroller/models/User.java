@@ -13,7 +13,7 @@ import jakarta.validation.constraints.Size;
 public class User {
     
     @Size(min=2, message="Please provide a minimum of 2 characters")
-    private String username;
+    private String username = "";
 
     // @NotEmpty(message="Please provide a minimum of 2 characters")
     @Size(min=2, message="Please provide a minimum of 2 characters")
@@ -22,9 +22,15 @@ public class User {
     //to receive message from endpoint. 
     private String message;
 
+    private Captcha captcha;
+
+    public User(){
+        this.captcha = new Captcha();
+    }
+
     // private int counter;
 
-    public User() {}
+    // public User() {}
 
     public User(String username, String password) {
         this.username = username;
@@ -45,7 +51,16 @@ public class User {
         this.password = password;
         this.message = message;
     }
+
     
+    
+    public User(String username,String password, String message,Captcha captcha) {
+        this.username = username;
+        this.password = password;
+        this.message = message;
+        this.captcha = captcha;
+    }
+
     public String getUsername() {return username;}
     public void setUsername(String username) {this.username = username;}
 
@@ -54,6 +69,10 @@ public class User {
 
     public String getMessage() {return message;}
     public void setMessage(String message) {this.message = message;}
+
+    public Captcha getCaptcha() {return captcha;}
+    public void setCaptcha(Captcha captcha) {this.captcha = captcha;}
+
 
     // public int getCounter() {return counter;}
     // public void setCounter(int counter) {this.counter = counter;}
@@ -79,8 +98,6 @@ public class User {
                 .add("message", this.getMessage())
                 .build();
     }
-
-
 
 }
 
