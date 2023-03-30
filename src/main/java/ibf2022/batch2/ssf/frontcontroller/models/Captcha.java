@@ -30,6 +30,7 @@ public class Captcha {
                 operator = '/';
                 this.answer = num1 / num2;
                 num1 = this.answer * num2; // Ensure that the question uses a whole number as the dividend
+                // this.answer = Math.round(this.answer * 100) / 100;
                 break;
         }
         this.question = num1 + " " + operator + " " + num2 + " = ?";
@@ -52,7 +53,6 @@ public class Captcha {
     }
 
     public boolean checkAnswer(float userAnswer) {
-        // counter++;
         return userAnswer == this.answer;
     }
 

@@ -18,11 +18,12 @@ public class ProtectedController {
 	// TODO Task 5
 	// Write a controller to protect resources rooted under /protected
 
-	@GetMapping(path="/protected")
-	public String getIndex(Model model) {
+	@GetMapping(path="/protected/**")
+	public String getAuthenticate() {
 		
 
-		return "view1";
+		return "redirect:/";
+		// return "view0";
 	}
 
 }

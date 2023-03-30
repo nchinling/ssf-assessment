@@ -7,7 +7,6 @@ import java.io.InputStream;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 public class User {
@@ -41,10 +40,6 @@ public class User {
         this.message = message;
     }
 
-    // public User(int counter) {
-    //     this.counter = counter;
-    // }
-
     public User(String username,
         String password, String message) {
         this.username = username;
@@ -52,8 +47,6 @@ public class User {
         this.message = message;
     }
 
-    
-    
     public User(String username,String password, String message,Captcha captcha) {
         this.username = username;
         this.password = password;
@@ -72,13 +65,6 @@ public class User {
 
     public Captcha getCaptcha() {return captcha;}
     public void setCaptcha(Captcha captcha) {this.captcha = captcha;}
-
-
-    // public int getCounter() {return counter;}
-    // public void setCounter(int counter) {this.counter = counter;}
-    
-    //to keep track of login attempts
-    // public void increment(){this.counter++;}
 
 
     public static User createUserObject(String json) throws IOException {

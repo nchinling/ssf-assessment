@@ -10,12 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import ibf2022.batch2.ssf.frontcontroller.models.Captcha;
 import ibf2022.batch2.ssf.frontcontroller.models.User;
 import ibf2022.batch2.ssf.frontcontroller.services.AuthenticationService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
@@ -24,7 +22,7 @@ import jakarta.validation.Valid;
 public class FrontController {
 
 	public boolean authenticated = false;
-	public int counter = 0;
+	// public int counter = 0;
 
 	@Autowired
     private AuthenticationService authSvc;
@@ -101,16 +99,28 @@ public class FrontController {
 		  if(authenticated == true || captcha.checkAnswer(user.getCaptcha().getUserAnswer()))
 		//   if(authenticated == true)
 		  {
-			return "view1";
+			return "/protected/view1";
 		  }
 		  else{		
-			user = getUser(session);
+			// user = getUser(session);
 			user.setUsername(username);
 			captcha.increment();
 			
 			return "redirect:/";}
 
     }
+
+
+	@GetMapping(path="/logout")
+	public String getlogout(Model model) throws IOException {
+
+		model.addAttribute(ATTR_CAPTCHA, new Captcha());
+		model.addAttribute(ATTR_USER, new User());
+		
+		return "view0";
+	}
+
+
 
 	private User getUser(HttpSession sess) {
 		User user = (User)sess.getAttribute(ATTR_USER);
