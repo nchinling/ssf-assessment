@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ibf2022.batch2.ssf.frontcontroller.models.Captcha;
 import ibf2022.batch2.ssf.frontcontroller.models.User;
 import ibf2022.batch2.ssf.frontcontroller.services.AuthenticationService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
@@ -63,7 +65,18 @@ public class FrontController {
 		}
 		
 
-		System.out.printf(">>> GETCOUNT(after submit): %d\n", captcha.getCounter());
+		int count = user.getCaptcha().getCounter();
+		float userAnswer = user.getCaptcha().getUserAnswer();
+		System.out.printf(">>> GETCOUNT(after submit): %d\n", count);
+		System.out.println("My float value is: \n" + userAnswer);
+		System.out.printf("My float value is: %.2f\n", userAnswer);
+
+		if (captcha.checkAnswer(user.getCaptcha().getUserAnswer())){
+			System.out.println("Your answer is correct");
+		}
+		else{
+			System.out.println("your answer is wrong");
+		}
 
 		String username = user.getUsername();
 		String password = user.getPassword();
@@ -82,7 +95,12 @@ public class FrontController {
 			
 		  }
 
-		  if(authenticated == true){
+		System.out.printf(">>> BOOLEAN_ANSWER: %s\n", captcha.checkAnswer(user.getCaptcha().getUserAnswer()));
+
+
+		  if(authenticated == true || captcha.checkAnswer(user.getCaptcha().getUserAnswer()))
+		//   if(authenticated == true)
+		  {
 			return "view1";
 		  }
 		  else{		

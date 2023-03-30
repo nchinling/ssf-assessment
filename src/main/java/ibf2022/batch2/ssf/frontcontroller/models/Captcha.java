@@ -4,6 +4,7 @@ import java.util.Random;
 public class Captcha {
     private String question = "";
     private float answer = 0f;
+    private float userAnswer = 0f;
     private int counter = 0;
 
     public Captcha() {
@@ -35,13 +36,24 @@ public class Captcha {
         this.counter = 0;
     }
 
+    public Captcha(String question, float userAnswer, int counter) {
+        this.question = question;
+        this.userAnswer = userAnswer;
+        this.counter = counter;
+    }
+
+    public Captcha(float userAnswer) {
+        this.userAnswer = userAnswer;
+    }
+
+
     public String getQuestion() {
         return question;
     }
 
     public boolean checkAnswer(float userAnswer) {
-        counter++;
-        return userAnswer == answer;
+        // counter++;
+        return userAnswer == this.answer;
     }
 
     public int getCounter() {return counter;}
@@ -49,6 +61,9 @@ public class Captcha {
 
     public float getAnswer() {return answer;}
     public void setAnswer(float answer) {this.answer = answer;}
+
+    public float getUserAnswer() {return userAnswer;}
+    public void setUserAnswer(float userAnswer) {this.userAnswer = userAnswer;}
 
     public void increment() {
         counter++;
