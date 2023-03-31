@@ -77,10 +77,10 @@ public class AuthenticationService {
 	// Write an implementation to check if a given user's login has been disabled
 	public boolean isLocked(String username) throws IOException {
 		// return false;
-		if(!authrepo.getUser(username).isPresent()){
-			return false;
+		if(authrepo.getUser(username).isPresent()){
+			return true;
 		}
-		return true;
+		return false;
 		
 	}
 
@@ -94,7 +94,7 @@ public class AuthenticationService {
         authrepo.save(user);
     }
 
-	public Optional<User> checkUser(final String username) throws IOException{
+	public Optional<String> checkUser(final String username) throws IOException{
         return authrepo.getUser(username);
     }  
 }

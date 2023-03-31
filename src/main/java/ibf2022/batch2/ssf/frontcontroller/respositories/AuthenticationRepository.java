@@ -42,13 +42,14 @@ public class AuthenticationRepository {
  
 	
 	 //get json string from redis
-	 public Optional<User> getUser(String username) throws IOException{
-		 String json = template.opsForValue().get(username);
-		 if(null == json|| json.trim().length() <= 0){
+	 public Optional<String> getUser(String username) throws IOException{
+		 String user = template.opsForValue().get(username);
+		 if(null == user|| user.trim().length() <= 0){
 			 return Optional.empty();
 		 }
  
-		 return Optional.of(User.createUserObject(json));
+		//  return Optional.of(User.createUserObjectFromRedis(user));
+		 return Optional.of(template.opsForValue().get(user));
 	 }
 
 }

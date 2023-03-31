@@ -100,7 +100,11 @@ public class FrontController {
 		  {
 			return "/protected/view1";
 		  }
-		  else{		
+		  else{
+			if(authSvc.isLocked(username)){
+				m.addAttribute(ATTR_USER, user);
+				return "view2";
+			}		
 			session.setAttribute(ATTR_USER, user);
 			captcha.increment();
 			

@@ -3,6 +3,7 @@ package ibf2022.batch2.ssf.frontcontroller.models;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringReader;
 
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
@@ -38,6 +39,7 @@ public class User {
         this.message = message;
     }
 
+    
     public User(String username,
         String password, String message) {
         this.username = username;
@@ -73,6 +75,20 @@ public class User {
             u.setMessage(o.getString("message"));            
         }
         return u;
+    }
+
+    // public static User createUserObjectFromRedis(String user) throws IOException{
+    //     User u = new User();
+    //     try(InputStream is = new ByteArrayInputStream(user.getBytes())) {
+    //         JsonObject o = toJSON(json);
+    //         u.setUsername(o.getString("username"));
+    //     }
+    //     return u;
+    // }
+
+    public static JsonObject toJSON(String json){
+        JsonReader r = Json.createReader(new StringReader(json));
+        return r.readObject();
     }
 
     public JsonObject toJSON(){
