@@ -5,9 +5,38 @@ public class Captcha {
     private String question;
     private float answer = 0f;
     private float userAnswer = 0f;
-    private int counter;
+    private int counter = 0;
 
     public Captcha() {
+        generateQuestion();
+    }
+
+   
+    public String getQuestion() {
+        // if (this.question == null) {
+        //     generateQuestion();
+        // }
+        return question;
+    }
+
+    public void setQuestion(String question) {this.question = question;}
+
+    
+    public boolean checkAnswer(float userAnswer) {
+        return userAnswer == this.answer;
+    }
+
+    public int getCounter() {return counter;}
+    public void setCounter(int counter) {this.counter = counter;}
+
+    public float getAnswer() {return answer;}
+    public void setAnswer(float answer) {this.answer = answer;}
+
+    public float getUserAnswer() {return userAnswer;}
+    public void setUserAnswer(float userAnswer) {this.userAnswer = userAnswer;}
+
+
+    public void generateQuestion() {
         Random rand = new Random();
         int num1 = rand.nextInt(50) + 1; // Random number between 1 and 50
         int num2 = rand.nextInt(50) + 1; // Random number between 1 and 50
@@ -32,29 +61,11 @@ public class Captcha {
                 break;
         }
         this.question = num1 + " " + operator + " " + num2 + " = ?";
-        this.counter = 0;
     }
-
-
-    public String getQuestion() {
-        return question;
-    }
-
-    public boolean checkAnswer(float userAnswer) {
-        return userAnswer == this.answer;
-    }
-
-    public int getCounter() {return counter;}
-    public void setCounter(int counter) {this.counter = counter;}
-
-    public float getAnswer() {return answer;}
-    public void setAnswer(float answer) {this.answer = answer;}
-
-    public float getUserAnswer() {return userAnswer;}
-    public void setUserAnswer(float userAnswer) {this.userAnswer = userAnswer;}
 
     public void increment() {
         counter++;
     }
+
 
 }
