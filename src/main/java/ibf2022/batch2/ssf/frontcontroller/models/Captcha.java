@@ -2,10 +2,10 @@ package ibf2022.batch2.ssf.frontcontroller.models;
 import java.util.Random;
 
 public class Captcha {
-    private String question = "";
+    private String question;
     private float answer = 0f;
     private float userAnswer = 0f;
-    private int counter = 0;
+    private int counter;
 
     public Captcha() {
         Random rand = new Random();

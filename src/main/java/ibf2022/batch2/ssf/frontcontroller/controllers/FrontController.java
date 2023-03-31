@@ -96,6 +96,7 @@ public class FrontController {
 		System.out.printf(">>> BOOLEAN_ANSWER: %s\n", captcha.checkAnswer(userAnswer));
 
 
+		// if(authenticated == true && (captcha.checkAnswer(userAnswer) && !authSvc.isLocked(username)))
 		  if(authenticated == true || (captcha.checkAnswer(userAnswer) && !authSvc.isLocked(username)))
 		  {
 			return "/protected/view1";
@@ -104,7 +105,8 @@ public class FrontController {
 			if(authSvc.isLocked(username)){
 				m.addAttribute(ATTR_USER, user);
 				return "view2";
-			}		
+			}
+					
 			session.setAttribute(ATTR_USER, user);
 			captcha.increment();
 			
