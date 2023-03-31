@@ -96,12 +96,11 @@ public class FrontController {
 		System.out.printf(">>> BOOLEAN_ANSWER: %s\n", captcha.checkAnswer(userAnswer));
 
 
-		  if(authenticated == true || captcha.checkAnswer(userAnswer))
+		  if(authenticated == true || (captcha.checkAnswer(userAnswer) && !authSvc.isLocked(username)))
 		  {
 			return "/protected/view1";
 		  }
 		  else{		
-			
 			session.setAttribute(ATTR_USER, user);
 			captcha.increment();
 			

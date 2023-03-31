@@ -26,7 +26,7 @@ public class AuthenticationRepository {
 	 public void save(User user){
 		
 		//implement timeout of 30 mins
-		int timeout = 1;
+		int timeout = 3;
     	Duration duration = Duration.ofMinutes(timeout);
 		this.template.opsForValue().set(user.getUsername(), user.toJSON().toString(), duration);
 	 }
