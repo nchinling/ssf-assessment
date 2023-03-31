@@ -45,15 +45,13 @@
 			</tr>
 		</table>
 
-		<div th:with="shouldDisplay=${captcha.counter > 0}">
-			<p th:if="${shouldDisplay}" th:text="${captcha.question}"></p>
-		</div>
-
 		<div th:if="${captcha.counter > 0}">
+			<p th:text="${captcha.question}"></p>
 			<label>Answer:</label>
-			<!-- <input type="text" id="answer" name="answer" data-th-field="*{captcha.answer}"> -->
 			<input type="text" id="answer" name="captcha.userAnswer" data-th-field="*{captcha.userAnswer}">
 		</div>
+
+
 		<br/>
 		<tr>
 			

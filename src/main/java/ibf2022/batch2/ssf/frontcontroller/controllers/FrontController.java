@@ -22,7 +22,7 @@ import jakarta.validation.Valid;
 public class FrontController {
 
 	public boolean authenticated = false;
-	// public int counter = 0;
+
 
 	@Autowired
     private AuthenticationService authSvc;
@@ -69,7 +69,7 @@ public class FrontController {
 		System.out.println("My float value is: \n" + userAnswer);
 		System.out.printf("My float value is: %.2f\n", userAnswer);
 
-		if (captcha.checkAnswer(user.getCaptcha().getUserAnswer())){
+		if (captcha.checkAnswer(userAnswer)){
 			System.out.println("Your answer is correct");
 		}
 		else{
@@ -93,17 +93,16 @@ public class FrontController {
 			
 		  }
 
-		System.out.printf(">>> BOOLEAN_ANSWER: %s\n", captcha.checkAnswer(user.getCaptcha().getUserAnswer()));
+		System.out.printf(">>> BOOLEAN_ANSWER: %s\n", captcha.checkAnswer(userAnswer));
 
 
-		  if(authenticated == true || captcha.checkAnswer(user.getCaptcha().getUserAnswer()))
-		//   if(authenticated == true)
+		  if(authenticated == true || captcha.checkAnswer(userAnswer))
 		  {
 			return "/protected/view1";
 		  }
 		  else{		
-			// user = getUser(session);
-			user.setUsername(username);
+			
+			session.setAttribute(ATTR_USER, user);
 			captcha.increment();
 			
 			return "redirect:/";}

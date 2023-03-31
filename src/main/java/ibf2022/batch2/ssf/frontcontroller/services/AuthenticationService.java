@@ -5,7 +5,6 @@ import java.io.StringReader;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -69,7 +68,6 @@ public class AuthenticationService {
 	// Write an implementation to disable a user account for 30 mins
 	public void disableUser(String username) throws IOException {
 		
-	 
 			authrepo.saveUsername(username);
 
 	}

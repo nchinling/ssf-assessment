@@ -9,8 +9,8 @@ public class Captcha {
 
     public Captcha() {
         Random rand = new Random();
-        float num1 = rand.nextInt(50) + 1; // Random number between 1 and 50
-        float num2 = rand.nextInt(50) + 1; // Random number between 1 and 50
+        int num1 = rand.nextInt(50) + 1; // Random number between 1 and 50
+        int num2 = rand.nextInt(50) + 1; // Random number between 1 and 50
         int operatorIndex = rand.nextInt(4); // Random index between 0 and 3
         char operator = ' ';
         switch (operatorIndex) {
@@ -29,22 +29,10 @@ public class Captcha {
             case 3:
                 operator = '/';
                 this.answer = num1 / num2;
-                num1 = this.answer * num2; // Ensure that the question uses a whole number as the dividend
-                // this.answer = Math.round(this.answer * 100) / 100;
                 break;
         }
         this.question = num1 + " " + operator + " " + num2 + " = ?";
         this.counter = 0;
-    }
-
-    public Captcha(String question, float userAnswer, int counter) {
-        this.question = question;
-        this.userAnswer = userAnswer;
-        this.counter = counter;
-    }
-
-    public Captcha(float userAnswer) {
-        this.userAnswer = userAnswer;
     }
 
 

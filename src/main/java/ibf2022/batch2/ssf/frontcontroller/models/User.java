@@ -12,7 +12,7 @@ import jakarta.validation.constraints.Size;
 public class User {
     
     @Size(min=2, message="Please provide a minimum of 2 characters")
-    private String username = "";
+    private String username="";
 
     // @NotEmpty(message="Please provide a minimum of 2 characters")
     @Size(min=2, message="Please provide a minimum of 2 characters")
@@ -21,15 +21,13 @@ public class User {
     //to receive message from endpoint. 
     private String message;
 
+    //to incorporate form submission of user object. 
     private Captcha captcha;
 
     public User(){
         this.captcha = new Captcha();
     }
 
-    // private int counter;
-
-    // public User() {}
 
     public User(String username, String password) {
         this.username = username;
